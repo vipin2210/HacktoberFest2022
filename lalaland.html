@@ -1,0 +1,93 @@
+<html>
+
+<head>
+    <title>Questão7</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <style>
+        label {
+            display: inline-block;
+            width: 90px;
+            text-align: left;
+        }
+
+        ;
+    </style>
+    <script>
+        function validarData(data) {
+            var anoAtual = new Date().getFullYear();
+            var ano = new Date(data).getFullYear();
+
+            var result = anoAtual - ano;
+
+            if (result < 14) {
+                alert("É necessário ter mais de 14 anos.");
+                return false;
+            }
+        }
+        function verificarCPF(c) {
+            var i;
+            s = c;
+            var c = s.substr(0, 9);
+            var dv = s.substr(9, 2);
+            var d1 = 0;
+            var v = false;
+            for (i = 0; i < 9; i++) {
+                d1 += c.charAt(i) * (10 - i);
+            }
+            if (d1 == 0) {
+                alert("CPF Inválido");
+                v = true;
+                return false;
+            }
+            d1 = 11 - (d1 % 11);
+            if (d1 > 9)
+                d1 = 0;
+            if (dv.charAt(0) != d1) {
+                alert("CPF Inválido");
+                v = true;
+                return false;
+            }
+            d1 *= 2;
+            for (i = 0; i < 9; i++) {
+                d1 += c.charAt(i) * (11 - i);
+            }
+            d1 = 11 - (d1 % 11);
+            if (d1 > 9)
+                d1 = 0;
+            if (dv.charAt(1) != d1) {
+                alert("CPF Inválido");
+                v = true;
+                return false;
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <form>
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" required />
+        </div>
+        <div>
+            <label for="data">Data de nascimento:</label>
+            <input type="date" id="data" onblur="return validarData(this.value)" required />
+        </div>
+        <div>
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" required />
+        </div>
+        <div>
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" maxlength="11" onblur="return verificarCPF(this.value)" required />
+        </div>
+        <div>
+            <input id="bt" type="submit" value="Enviar" />
+        </div>
+    </form>
+
+</body>
+
+</html>
